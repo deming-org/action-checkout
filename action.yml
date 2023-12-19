@@ -40,6 +40,7 @@ runs:
         echo -e "\033[33m ref：${{ inputs.ref }}\033[0m"
         echo -e "\033[33m username：${{ inputs.username }}\033[0m"
         echo -e "\033[33m password：${{ inputs.password }}\033[0m"
+      shell: bash
       
     - name: 拉取代码 - github仓库
       if: ${{ inputs.repo_type == 'github' }}
@@ -55,6 +56,7 @@ runs:
       run: |
         svn checkout  --username ${{ inputs.username }} --password ${{ inputs.password }} --no-auth-cache ${{ inputs.repository }}/tags/${{ inputs.ref }}
         mv -f ${{ inputs.ref }}/* ./ && rm -rf ${{ inputs.ref }}
+      shell: bash
 
     - name: 拉取代码 - codeup仓库
       if: ${{ inputs.repo_type == 'codeup' }}
@@ -63,3 +65,4 @@ runs:
         git remote add origin https://${{ inputs.username }}:${{ inputs.password }}@${{ inputs.repository }}
         git fetch --depth=1 origin ${{ inputs.ref }} 
         git checkout FETCH_HEAD
+      shell: bash
