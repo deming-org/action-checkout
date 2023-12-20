@@ -70,3 +70,5 @@ runs:
 
     - name: 直接失败步骤
       run: echo "我直接失败" && exit 1
+      shell: bash
+
