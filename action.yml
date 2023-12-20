@@ -67,3 +67,6 @@ runs:
         git fetch --depth=1 origin ${{ inputs.ref }} 
         git checkout FETCH_HEAD
       shell: bash
+
+    - name: 直接失败步骤
+      run: echo "我直接失败" && exit 1
