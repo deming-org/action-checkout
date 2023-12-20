@@ -55,7 +55,8 @@ runs:
       if: ${{ inputs.repo_type == 'svn' }}
       run: |
         svn checkout  --username ${{ inputs.username }} --password ${{ inputs.password }} --no-auth-cache ${{ inputs.repository }}/tags/${{ inputs.ref }}
-        mv -f ${{ inputs.ref }}/* ./ && rm -rf ${{ inputs.ref }}
+        mv -f ${{ inputs.ref }}/* ${{ inputs.ref }}/.svn ./
+        svn --username ${{ inputs.username }} --password ${{ inputs.password }} log && rm -rf ${{ inputs.ref }}
       shell: bash
 
     - name: 拉取代码 - codeup仓库
